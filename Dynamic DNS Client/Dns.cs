@@ -17,7 +17,7 @@ namespace Dynamic_DNS_Client
             Console.WriteLine("Initializing IP: " + lastIp);
 
             // Create Authentication Header
-            client.DefaultRequestHeaders.Add($"Authorization", $"Basic {Base64Encode($"wZSSX0NygCGtQRIm:3ONaSGNdxkOkralg")}");
+            client.DefaultRequestHeaders.Add($"Authorization", $"Basic {Base64Encode($"user:pass")}");
 
             // Runs DNS checker every 30 minutes
             Timer timer = new Timer(DnsChecker, null, 1800000, 1800000);
@@ -37,7 +37,7 @@ namespace Dynamic_DNS_Client
 
         static async private void UpdateDNS()
         {
-            var result = await client.PostAsync("https://domains.google.com/nic/update?hostname=insulinrxcalculator.com&myip=" + GetExternalIP(), null);
+            var result = await client.PostAsync("https://domains.google.com/nic/update?hostname=domain.com&myip=" + GetExternalIP(), null);
             Console.WriteLine(result.StatusCode);
         }
 

@@ -136,7 +136,7 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "N/A";
             // 
-            // Form1
+            // MainConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,7 +152,7 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "MainConsole";
             this.Text = "SimpleCore Dynamic DNS Client";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
