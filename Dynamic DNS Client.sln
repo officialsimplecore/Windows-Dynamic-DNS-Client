@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dynamic DNS Client", "Dynamic DNS Client\Dynamic DNS Client.csproj", "{DF98E24D-B465-4F92-A28C-3755065A13CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF98E24D-B465-4F92-A28C-3755065A13CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF98E24D-B465-4F92-A28C-3755065A13CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF98E24D-B465-4F92-A28C-3755065A13CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF98E24D-B465-4F92-A28C-3755065A13CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AF400CE-35A8-4176-A705-9B12210F9BAB}
+	EndGlobalSection
+EndGlobal
