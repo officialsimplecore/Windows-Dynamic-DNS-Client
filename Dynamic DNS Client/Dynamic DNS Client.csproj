@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Dynamic_DNS_Client</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
+    <PackageId>Dynamic DNS Client</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
