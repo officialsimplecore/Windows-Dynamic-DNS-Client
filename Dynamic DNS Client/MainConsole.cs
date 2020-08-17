@@ -34,13 +34,13 @@ namespace Dynamic_DNS_Client
             // Initialize external IP label
             label7.Text = Dns.GetExternalIP();
 
-            if (ConfigurationManager.AppSettings["autostart"] == "true" && domain != "" && user != "" && pass != "")
+            if (ConfigurationManager.AppSettings["autostart"] == "true" && domain != "" && user != "" && pass != "" && interval != "")
             {
                 textBox1.Text = domain;
                 textBox2.Text = user;
                 textBox3.Text = pass;
                 textBox4.Text = interval;
-                Dns.RunDnsListen(domain, user, pass, 1800000);
+                Dns.RunDnsListen(domain, user, pass, Int16.Parse(interval) * 60000);
                 SetRunningUI();
             } else
             {
