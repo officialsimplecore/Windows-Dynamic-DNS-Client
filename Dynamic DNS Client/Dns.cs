@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 
@@ -15,17 +16,45 @@ namespace Dynamic_DNS_Client
             // Initializes Last IP
             lastIp = GetExternalIP();
             Console.WriteLine("Initializing IP: " + lastIp);
-
-            // Create Authentication Header
-            client.DefaultRequestHeaders.Add($"Authorization", $"Basic {Base64Encode($"user:pass")}");
-
-            // Runs DNS checker every 30 minutes
-            Timer timer = new Timer(DnsChecker, null, 1800000, 1800000);
         }
+        static public void RunDnsListen(string _domain, string user, string pass, int _interval)
+        {
+            // Set instance variables to parameters
+            interval = _interval;
+            domain = _domain;
+            Console.WriteLine($"User: {user} Pass: {pass} Domain: {domain}");
+            // Create Authentication Header
+            client.DefaultRequestHeaders.Add($"Authorization", $"Basic {Base64Encode($"{user}:{pass}")}");
+
+            // Start DNSChecker through timer
+            SetTimer(true);
+        }
+
+        static public void StopDnsListen()
+        {
+            client.DefaultRequestHeaders.Remove($"Authorization");
+            SetTimer(false);
+        }
+
+        static private void SetTimer(bool setting)
+        {
+            
+            if (setting == true)
+            {
+                // Runs DNS checker on ms interval
+                _timer.Change(interval, interval);
+            } else
+            {
+                _timer.Change(Timeout.Infinite, Timeout.Infinite);
+            }
+        }
+
         static private void DnsChecker(Object state)
         {
+            // Checks if there is a change
             if (lastIp != GetExternalIP())
             {
+                // Sends an update record when there is a change
                 UpdateDNS();
                 lastIp = GetExternalIP();
             }
@@ -37,7 +66,7 @@ namespace Dynamic_DNS_Client
 
         static async private void UpdateDNS()
         {
-            var result = await client.PostAsync("https://domains.google.com/nic/update?hostname=domain.com&myip=" + GetExternalIP(), null);
+            var result = await client.PostAsync("https://domains.google.com/nic/update?hostname=" + domain + "&myip=" + GetExternalIP(), null);
             Console.WriteLine(result.StatusCode);
         }
 
@@ -56,7 +85,7 @@ namespace Dynamic_DNS_Client
             return externalAddress;
         }
 
-        public static string Base64Encode(string textToEncode)
+        private static string Base64Encode(string textToEncode)
         {
             byte[] textAsBytes = Encoding.UTF8.GetBytes(textToEncode);
             return Convert.ToBase64String(textAsBytes);
@@ -64,5 +93,10 @@ namespace Dynamic_DNS_Client
 
         private static readonly HttpClient client = new HttpClient();
         private static string lastIp;
+
+        private static string domain;
+        private static int interval;
+
+        private static Timer _timer = new Timer(DnsChecker, null, Timeout.Infinite, Timeout.Infinite);
     }
 }
