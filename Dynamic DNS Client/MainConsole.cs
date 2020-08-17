@@ -34,7 +34,7 @@ namespace Dynamic_DNS_Client
             // Initialize external IP label
             label7.Text = Dns.GetExternalIP();
 
-            if (ConfigurationManager.AppSettings["interval"] == "true" && domain != "" && user != "" && pass != "")
+            if (ConfigurationManager.AppSettings["autostart"] == "true" && domain != "" && user != "" && pass != "")
             {
                 textBox1.Text = domain;
                 textBox2.Text = user;
